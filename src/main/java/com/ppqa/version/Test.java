@@ -22,6 +22,8 @@ public class Test {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("Hello");
 		List<Node> childList = doc.body().childNodes();
 		for (Iterator<Node> iterator = childList.iterator(); iterator.hasNext();) {
 			Node node = (Node) iterator.next();
