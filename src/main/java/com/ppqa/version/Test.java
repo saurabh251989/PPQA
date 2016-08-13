@@ -23,7 +23,6 @@ public class Test {
 			e.printStackTrace();
 		}
 		System.out.println("Sudip");
-		System.out.println("&&&&&&&&&&&&&&&&&&&&");
 
 		System.out.println("Hello");
 		System.out.println("*****************");
