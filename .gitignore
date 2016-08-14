@@ -1,1 +1,4 @@
-.xml
+.settings/
+.project
+.classpath
+.gitignore
