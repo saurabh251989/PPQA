@@ -30,10 +30,18 @@ public class Test {
 			Node node = (Node) iterator.next();
 
 			List<Node> childNode = node.childNodes();
-			//System.out.println(childNode.get(0));
+			System.out.println(childNode.get(8).childNode(4).childNode(1));//.childNode(0));
+			
+			System.out.println("------------");
 			System.out.println(childNode.get(10).childNode(0).childNode(0).childNode(0));
 			System.out.println(childNode.get(10).childNode(2).childNode(0));//.childNode(0));
-
+			System.out.println("------------");
+			//System.out.println(childNode.get(10).childNode(4).childNode(1).childNode(0));
+			System.out.println(childNode.get(10).childNode(4).childNode(1));
+			System.out.println(childNode.get(10).childNode(4).childNode(3));
+			System.out.println(childNode.get(10).childNode(4).childNode(5));
+			System.out.println("------------");
+			//System.out.println(childNode.get(10).childNode(0).childNode(1).childNode(0));
 	System.out.println(childNode.get(10).childNode(12).childNode(0));
 			System.out.println(childNode.get(10).childNode(14).childNode(0));
 
