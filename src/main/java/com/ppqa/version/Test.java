@@ -15,7 +15,7 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		File input = new File("C:/Users/Saurabh Kumar/Downloads/aim_adiru (2)/aim_adiru.HTM");
+		File input = new File("F:/aim_adiru.HTM");
 		Document doc = null;
 		try {
 			doc = Jsoup.parse(input, "UTF-8");
@@ -28,13 +28,13 @@ public class Test {
 		List<Node> childListNodde3 = childList.get(3).childNodes();
 		for (Iterator<Node> iterator = childListNodde3.iterator(); iterator.hasNext();) {
 			Node node = (Node) iterator.next();
-
 			List<Node> childNode = node.childNodes();
+			System.out.println(childNode.get(0));
+			
+			System.out.println(childNode.get(10));
 
-			System.out.println(childNode.get(10).childNode(0).childNode(0).childNode(0));
-
-			System.out.println(childNode.get(10).childNode(12).childNode(0));
-			System.out.println(childNode.get(10).childNode(14).childNode(0));
+	//		System.out.println(childNode.get(10).childNode(12).childNode(0));
+		//	System.out.println(childNode.get(10).childNode(14).childNode(0));
 
 		}
 
