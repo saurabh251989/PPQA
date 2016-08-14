@@ -28,13 +28,14 @@ public class Test {
 		List<Node> childListNodde3 = childList.get(3).childNodes();
 		for (Iterator<Node> iterator = childListNodde3.iterator(); iterator.hasNext();) {
 			Node node = (Node) iterator.next();
-			List<Node> childNode = node.childNodes();
-			System.out.println(childNode.get(0));
-			
-			System.out.println(childNode.get(10));
 
-	//		System.out.println(childNode.get(10).childNode(12).childNode(0));
-		//	System.out.println(childNode.get(10).childNode(14).childNode(0));
+			List<Node> childNode = node.childNodes();
+			//System.out.println(childNode.get(0));
+			System.out.println(childNode.get(10).childNode(0).childNode(0).childNode(0));
+			System.out.println(childNode.get(10).childNode(2).childNode(0));//.childNode(0));
+
+	System.out.println(childNode.get(10).childNode(12).childNode(0));
+			System.out.println(childNode.get(10).childNode(14).childNode(0));
 
 		}
 
