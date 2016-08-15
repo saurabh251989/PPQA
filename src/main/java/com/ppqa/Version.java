@@ -1,4 +1,4 @@
-package com.ppqa.version;
+package com.ppqa;
 
 public class Version {
 

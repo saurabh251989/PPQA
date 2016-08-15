@@ -1,4 +1,4 @@
-package com.ppqa.version;
+package com.ppqa;
 
 import java.io.File;
 import java.io.IOException;
