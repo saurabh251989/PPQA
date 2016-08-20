@@ -39,6 +39,9 @@ public class Test {
 		for (Iterator<Node> iterator = childListNodde3.iterator(); iterator.hasNext();) {
 			Node node = (Node) iterator.next();
 
+			
+			
+			System.out.println("Hello");
 			List<Node> nodeList = node.childNodes();
 
 			List<Node> nodeList1 = removeTextNode(nodeList);
