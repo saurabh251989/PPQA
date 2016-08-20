@@ -1,6 +1,7 @@
 package com.ppqa.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,10 @@ import org.jsoup.nodes.Node;
 public class AttributePosition {
 
 	final private Node childNode;
+	HashMap<String,Integer> hm=new HashMap<String,Integer>();  
+
+	private int j = 0;
+	private List<AtrributePostionTO> listAttribute = new ArrayList<AtrributePostionTO>();
 
 	/**
 	 * @param childNode
@@ -24,9 +29,6 @@ public class AttributePosition {
 	public AttributePosition(Node childNode) {
 		this.childNode = childNode;
 	}
-
-	private int j = 0;
-	private List<AtrributePostionTO> listAttribute = new ArrayList<AtrributePostionTO>();
 
 	private void getAttributeAndPosition(Node childNode) {
 
@@ -52,18 +54,19 @@ public class AttributePosition {
 
 			if (childNode.childNodeSize() == 1) {
 
-				listAttribute.add(new AtrributePostionTO(childNode.childNode(0).toString(), j));
+				hm.put(childNode.childNode(0).toString(), j);
+				//listAttribute.add(new AtrributePostionTO(childNode.childNode(0).toString(), j));
 				j++;
 			}
 		}
 
 	}
 
-	public List<AtrributePostionTO> getAttributeAndPosition() {
+	public HashMap<String,Integer> getAttributeAndPosition() {
 
 		getAttributeAndPosition(childNode);
 
-		return listAttribute;
+		return hm;
 	}
 
 }

@@ -4,10 +4,13 @@ package com.ppqa;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
 
 import org.jsoup.nodes.Node;
@@ -34,40 +37,59 @@ public class Test {
 		}
 
 		List<Node> childList = doc.body().childNodes();
-
+		List<VersionPPQA> listVersionPPQA = new ArrayList<VersionPPQA>();
 		List<Node> childListNodde3 = childList.get(3).childNodes();
 		for (Iterator<Node> iterator = childListNodde3.iterator(); iterator.hasNext();) {
-			Node node = (Node) iterator.next();
+			Node node = iterator.next();
 
 			List<Node> nodeList = node.childNodes();
 
-			List<Node> nodeList1 = removeTextNode(nodeList);
+			List<Node> nodeListMTS = removeTextNode(nodeList);
+			MTSNode mt = new MTSNode();
+			List<Node> nodeMts = mt.getMTSNode(nodeListMTS);
+			AttributePosition attributePosition = new AttributePosition(nodeListMTS.get(0));
 
-			//System.out.println(nodeList1.get(4));
-			nodeList1 = removeTextNode(nodeList1.get(4).childNodes());
-			//System.out.println(nodeList1.get(0));
-			for (Iterator<Node> iterator2 = nodeList1.iterator(); iterator2.hasNext();) {
-				Node node2 = (Node) iterator2.next();
-				System.out.println("**************");
+			HashMap<String, Integer> att = attributePosition.getAttributeAndPosition();
 
-				System.out.println(node2);
+			for (Iterator<Node> iterator2 = nodeMts.iterator(); iterator2.hasNext();) {
+				Node node2 = iterator2.next();
+				List<Node> listNode = removeTextNode(node2.childNodes());
+
+				String pUID = getNodeText(listNode.get(att.get("PUID")));
+				
+				String[] vV_Verification_Procedure_Name= null;
+				if(getNodeText(
+						listNode.get(att.get("VV_Verification_Procedure_Name")))!=null)
+				 {
+					vV_Verification_Procedure_Name = getNodeText(
+				 
+						listNode.get(att.get("VV_Verification_Procedure_Name"))).split(";");
+				 }
+				String[] temp =null;
+				if(getNodeText(listNode.get(att.get("VV_Verification_Procedure_Version")))!=null)
+				{
+				
+					temp= getNodeText(listNode.get(att.get("VV_Verification_Procedure_Version"))).split(";");
+				
+				}
+				Integer[] vV_Verification_Procedure_Version=null;
+				int i = 0;
+				if(temp!=null)
+				{
+					 vV_Verification_Procedure_Version = new Integer[temp.length];
+				for (String str : temp) {
+					vV_Verification_Procedure_Version[i] = Integer.parseInt(str);
+					i++;
+				}
+				}
+				listVersionPPQA
+						.add(new VersionPPQA(pUID, vV_Verification_Procedure_Name, vV_Verification_Procedure_Version));
+
 			}
 
-			List<Node> nodeList2 = nodeList1.get(2).childNodes();
-			for (Iterator<Node> iterator2 = nodeList2.iterator(); iterator2.hasNext();) {
-				Node node2 = (Node) iterator2.next();
-				//System.out.println(node2.toString());
-				// System.out.println("Hello");
-				// System.out.println(node2);
-			}
-
-			AttributePosition attributePosition = new AttributePosition(nodeList1.get(0));
-
-			for (Iterator<AtrributePostionTO> iterator1 = attributePosition.getAttributeAndPosition()
-					.iterator(); iterator1.hasNext();) {
-				AtrributePostionTO node1 = (AtrributePostionTO) iterator1.next();
-				//System.out.println(node1.getAttribute());
-				//System.out.println(node1.getPosition());
+			for (Iterator<VersionPPQA> iterator2 = listVersionPPQA.iterator(); iterator2.hasNext();) {
+				VersionPPQA versionPPQA = (VersionPPQA) iterator2.next();
+				System.out.println(versionPPQA.toString());
 			}
 
 		}
@@ -78,7 +100,7 @@ public class Test {
 		List<Node> nodeList = new ArrayList<Node>();
 
 		for (Iterator<Node> iterator2 = childNode.iterator(); iterator2.hasNext();) {
-			Node node1 = (Node) iterator2.next();
+			Node node1 = iterator2.next();
 			if (node1.childNodeSize() == 0 && node1.nodeName().equals("#text")) {
 				continue;
 			}
@@ -86,6 +108,19 @@ public class Test {
 
 		}
 		return nodeList;
+
+	}
+
+	static String getNodeText(Node node) {
+
+		for (int i = 0; i < node.childNodeSize();) {
+			node = node.childNode(0);
+		}
+		if (node.attributes().hasKey("text")) {
+			return node.toString();
+		} else {
+			return null;
+		}
 
 	}
 
