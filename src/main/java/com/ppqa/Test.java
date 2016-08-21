@@ -106,8 +106,7 @@ public class Test {
 					
 					HTMLReport ht=new HTMLReport(vl);
 					ht.generateHTMLReport(filePath.getFileName().toString());
-					ht.generateHTMLReport();
-
+					
 				}
 		    }
 		});
