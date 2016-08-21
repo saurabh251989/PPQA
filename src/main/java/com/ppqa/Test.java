@@ -92,8 +92,11 @@ public class Test {
 
 			
 			ValidateNameAndVersion ValidateNameAndVersion=new ValidateNameAndVersion();
-			ValidateNameAndVersion.validate(listVersionPPQA);
-			
+			List<ValidationResult> vl = ValidateNameAndVersion.validate(listVersionPPQA);
+			for (Iterator iterator2 = vl.iterator(); iterator2.hasNext();) {
+				ValidationResult validationResult = (ValidationResult) iterator2.next();
+				System.out.println(validationResult.toString());
+			}
 		}
 	}
 
