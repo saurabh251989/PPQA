@@ -31,12 +31,24 @@ public class ClearCaseNameAndVersion {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 
+<<<<<<< HEAD
 				String[] words = line.split("@@");
 
 				String name = words[0].substring(words[0].lastIndexOf("\\") + 1);
 				Integer version = Integer.parseInt(words[1].replace("\\main\\development\\", ""));
 
 				nameVersion.put(name, version);
+=======
+			    String[] words=line.split("@@");
+			    
+			    String name=words[0].substring(words[0].lastIndexOf("\\")+1);
+			    Integer version=Integer.parseInt(words[1].replace("\\main\\development\\", ""));
+			    	
+			    nameVersion.put(name, version);
+			    }
+			} catch (IOException x) {
+			    System.err.println(x);
+>>>>>>> refs/remotes/origin/master
 			}
 		} catch (IOException x) {
 			System.err.println(x);
