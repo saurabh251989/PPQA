@@ -3,6 +3,8 @@
  */
 package com.ppqa;
 
+import java.util.Arrays;
+
 /**
  * @author Saurabh Kumar
  *
@@ -23,6 +25,19 @@ public class ValidationResult {
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ValidationResult [PUID=" + PUID + ", VV_Verification_Procedure_Name="
+				+ Arrays.toString(VV_Verification_Procedure_Name) + ", VV_Verification_Procedure_Version="
+				+ Arrays.toString(VV_Verification_Procedure_Version) + ", Comment=" + Arrays.toString(Comment) + "]";
+	}
+
+
+
+
 	/**
 	 * @param pUID
 	 * @param vV_Verification_Procedure_Name

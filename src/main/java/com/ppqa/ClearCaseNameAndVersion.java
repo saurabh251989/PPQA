@@ -36,10 +36,10 @@ public class ClearCaseNameAndVersion {
 
 			    String[] words=line.split("@@");
 			    
-			    String name=words[0].substring(words[0].lastIndexOf("//")+1);
-			   System.out.println(words[1]);
+			    String name=words[0].substring(words[0].lastIndexOf("\\")+1);
 			    Integer version=Integer.parseInt(words[1].replace("main/developement/", ""));
-			    		nameVersion.put(name, version);
+			    	
+			    nameVersion.put(name, version);
 			    }
 			} catch (IOException x) {
 			    System.err.println(x);
