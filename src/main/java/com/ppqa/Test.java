@@ -90,6 +90,10 @@ public class Test {
 				System.out.println(versionPPQA.toString());
 			}
 
+			
+			ValidateNameAndVersion ValidateNameAndVersion=new ValidateNameAndVersion();
+			ValidateNameAndVersion.validate(listVersionPPQA);
+			
 		}
 	}
 

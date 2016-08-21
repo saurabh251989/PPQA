@@ -28,7 +28,7 @@ public class ClearCaseNameAndVersion {
 		HashMap<String,Integer> nameVersion=new HashMap<String, Integer>();
 
 		
-		try (FileReader in = new FileReader("/Input/Input.txt");
+		try (FileReader in = new FileReader("Input/Input.txt");
 			    BufferedReader reader =
 			      new BufferedReader(in)) {
 			    String line = null;
@@ -37,7 +37,8 @@ public class ClearCaseNameAndVersion {
 			    String[] words=line.split("@@");
 			    
 			    String name=words[0].substring(words[0].lastIndexOf("//")+1);
-			    Integer version=Integer.parseInt(words[1].replace("main//developement//", ""));
+			   System.out.println(words[1]);
+			    Integer version=Integer.parseInt(words[1].replace("main/developement/", ""));
 			    		nameVersion.put(name, version);
 			    }
 			} catch (IOException x) {
