@@ -136,7 +136,7 @@ public class HTMLReport {
 	 */
 	public void generateHTMLReport(String fileName) {
 		try {
-			File statText = new File("Output/" + "Result" + fileName);
+			File statText = new File("Output/" + "Result_" + fileName);
 			FileOutputStream is = new FileOutputStream(statText, false);
 			OutputStreamWriter osw = new OutputStreamWriter(is);
 			Writer report = new BufferedWriter(osw);

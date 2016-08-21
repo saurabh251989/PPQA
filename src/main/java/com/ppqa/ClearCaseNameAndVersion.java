@@ -30,7 +30,7 @@ public class ClearCaseNameAndVersion {
 
 				String[] words = line.split("@@");
 
-				String name = words[0].substring(words[0].lastIndexOf("\\") + 1);
+				String name = words[0].substring(words[0].lastIndexOf("\\testscripts\\") + 13);
 				Integer version = Integer.parseInt(words[1].replace("\\main\\development\\", ""));
 
 				nameVersion.put(name, version);

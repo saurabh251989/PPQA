@@ -33,7 +33,7 @@ public class Test {
 		Files.walk(Paths.get("Input/")).forEach(filePath -> {
 
 			if (Files.isRegularFile(filePath) && (filePath.getFileName().toString().endsWith(".html")
-					|| filePath.getFileName().toString().endsWith(".htm"))) {
+					|| filePath.getFileName().toString().endsWith(".htm") || filePath.getFileName().toString().endsWith(".HTM")|| filePath.getFileName().toString().endsWith(".HTML"))) {
 				Document doc = null;
 				try {
 					doc = Jsoup.parse(filePath.toFile(), "UTF-8");
