@@ -3,6 +3,7 @@
  */
 package com.ppqa.util;
 
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,25 +58,23 @@ public class HTMLReport {
 		System.out.println("<caption>Report</caption>");
 		System.out.println("<tr>");
 		System.out.println("<th>");
-		System.out.println("MTS IVVP");
+		System.out.println("PUID");
 		System.out.println("</th>");
 		System.out.println("<th>");
-		System.out.println("PTU NAME");
+		System.out.println("VV_Verification_Procedure_Name");
 		System.out.println("</th>");
-		
+
 		System.out.println("<th>");
-		System.out.println("Ptu Version");
+		System.out.println("VV_Verification_Procedure_Version");
 		System.out.println("</th>");
-		
+
 		System.out.println("<th>");
 		System.out.println("Comment");
 		System.out.println("</th>");
-		
-		
+
 		System.out.println("<tr>");
-	
-		
-		for (Iterator iterator = validationResult.iterator(); iterator.hasNext();) {
+
+		for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
 			ValidationResult validationResult2 = (ValidationResult) iterator.next();
 
 			System.out.println("<tr>");
@@ -94,7 +93,7 @@ public class HTMLReport {
 			}
 			System.out.println("</td>");
 			System.out.println("<td>");
-			if (validationResult2.getVV_Verification_Procedure_Version()!=null) {
+			if (validationResult2.getVV_Verification_Procedure_Version() != null) {
 				for (int i = 0; i < validationResult2.getVV_Verification_Procedure_Version().length; i++) {
 					System.out.println(validationResult2.getVV_Verification_Procedure_Version()[i]);
 					System.out.println("<br/>");
@@ -107,10 +106,9 @@ public class HTMLReport {
 
 			System.out.println("</td>");
 			System.out.println("<td>");
-			if (validationResult2.getComment()!=null) {
+			if (validationResult2.getComment() != null) {
 				for (int i = 0; i < validationResult2.getComment().length; i++) {
 
-					
 					System.out.println(validationResult2.getComment()[i]);
 					System.out.println("<br/>");
 				}
@@ -138,163 +136,174 @@ public class HTMLReport {
 	 */
 	public void generateHTMLReport(String fileName) {
 		try {
-            //Whatever the file path is.
-            File statText = new File("Output/"+"Result"+fileName);
-            FileOutputStream is = new FileOutputStream(statText,false);
-            OutputStreamWriter osw = new OutputStreamWriter(is);    
-            Writer report = new BufferedWriter(osw);
+			File statText = new File("Output/" + "Result" + fileName);
+			FileOutputStream is = new FileOutputStream(statText, false);
+			OutputStreamWriter osw = new OutputStreamWriter(is);
+			Writer report = new BufferedWriter(osw);
+            String cr="green";
+			xyz:
+			for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
+				ValidationResult validationResult2 = (ValidationResult) iterator.next();
+		         for (int i = 0; i < validationResult2.getComment().length; i++) {
+					 
+		        	 if(!validationResult2.getComment()[i].equals("None"))
+		        	 {
+		        		
+		        		 cr="red";
+		        	      break xyz;	 
+		        	 }
+		        	 }
+				}	
+			
+			
+			
+			report.write("<!DOCTYPE html>");
+			report.write("\n");
 
-    		report.write("<!DOCTYPE html>");
-    		report.write("\n");
+			report.write("<html>");
+			report.write("\n");
+			report.write("<head>");
+			report.write("\n");
+			report.write("<style>");
+			report.write("\n");
+			report.write("table, th, td {");
+			report.write("\n");
+			report.write("    border: 1px solid black;");
+			report.write("\n");
+			report.write(" border-collapse: collapse;");
+			report.write("\n");
+			report.write("}");
+			report.write("\n");
+			report.write("th, td {");
+			report.write("\n");
+			report.write("padding: 5px;");
+			report.write("\n");
+			report.write("text-align: left;");
+			report.write("\n");
+			report.write("}");
+			report.write("\n");
+			report.write("</style>");
+			report.write("\n");
+			report.write("</head>");
+			report.write("\n");
+			report.write("<body>");
+			report.write("\n");
 
-    		report.write("<html>");
-    		report.write("\n");
-    		report.write("<head>");
-    		report.write("\n");
-    		report.write("<style>");
-    		report.write("\n");
-    		report.write("table, th, td {");
-    		report.write("\n");
-    		report.write("    border: 1px solid black;");
-    		report.write("\n");
-    		report.write(" border-collapse: collapse;");
-    		report.write("\n");
-    		report.write("}");
-    		report.write("\n");
-    		report.write("th, td {");
-    		report.write("\n");
-    		report.write("padding: 5px;");
-    		report.write("\n");
-    		report.write("text-align: left;");
-    		report.write("\n");
-    		report.write("}");
-    		report.write("\n");
-    		report.write("</style>");
-    		report.write("\n");
-    		report.write("</head>");
-    		report.write("\n");
-    		report.write("<body>");
-    		report.write("\n");
+			report.write("<table style=\"width:100%\">");
+			report.write("\n");
+			report.write("<caption ><font color="+cr+">"+fileName.substring(0,fileName.indexOf("."))+"_REPORT"+"</caption>");
+			report.write("\n");
+			report.write("<tr>");
+			report.write("\n");
+			report.write("<th>");
+			report.write("\n");
+			report.write("PUID");
+			report.write("\n");
+			report.write("</th>");
+			report.write("\n");
+			report.write("<th>");
+			report.write("\n");
+			report.write("VV_Verification_Procedure_Name");
+			report.write("\n");
+			report.write("</th>");
+			report.write("\n");
 
-    		report.write("<table style=\"width:100%\">");
-    		report.write("\n");
-    		report.write("<caption>Report</caption>");
-    		report.write("\n");
-    		report.write("<tr>");
-    		report.write("\n");
-    		report.write("<th>");
-    		report.write("\n");
-    		report.write("MTS IVVP");
-    		report.write("\n");
-    		report.write("</th>");
-    		report.write("\n");
-    		report.write("<th>");
-    		report.write("\n");
-    		report.write("PTU NAME");
-    		report.write("\n");
-    		report.write("</th>");
-    		report.write("\n");
-    		
-    		report.write("<th>");
-    		report.write("\n");
-    		report.write("Ptu Version");
-    		report.write("\n");
-    		report.write("</th>");
-    		report.write("\n");
-    		report.write("<th>");
-    		report.write("\n");
-    		report.write("Comment");
-    		report.write("\n");
-    		report.write("</th>");
-    		report.write("\n");
-    		
-    		
-    		report.write("<tr>");
-    		report.write("\n");
-    	
-    		
-    		for (Iterator iterator = validationResult.iterator(); iterator.hasNext();) {
-    			ValidationResult validationResult2 = (ValidationResult) iterator.next();
+			report.write("<th>");
+			report.write("\n");
+			report.write("VV_Verification_Procedure_Version");
+			report.write("\n");
+			report.write("</th>");
+			report.write("\n");
+			report.write("<th>");
+			report.write("\n");
+			report.write("Comment");
+			report.write("\n");
+			report.write("</th>");
+			report.write("\n");
 
-    			report.write("<tr>");
-        		report.write("\n");
-    			report.write("<td>");
-        		report.write("\n");
-    			report.write(validationResult2.getPUID());
-    			report.write("</td>");
-        		report.write("\n");
-    			report.write("<td>");
-        		report.write("\n");
-    			if (validationResult2.getVV_Verification_Procedure_Name() != null) {
-    				for (int i = 0; i < validationResult2.getVV_Verification_Procedure_Name().length; i++) {
+			report.write("<tr>");
+			report.write("\n");
 
-    					report.write(validationResult2.getVV_Verification_Procedure_Name()[i]);
-    		    		report.write("\n");
-    					report.write("<br/>");
-    		    		report.write("\n");
-    				}
-    			} else {
-    				report.write("");
-    	    		report.write("\n");
-    			}
-    			report.write("</td>");
-        		report.write("\n");
-    			report.write("<td>");
-        		report.write("\n");
-    			if (validationResult2.getVV_Verification_Procedure_Version()!=null) {
-    				for (int i = 0; i < validationResult2.getVV_Verification_Procedure_Version().length; i++) {
-    					report.write(validationResult2.getVV_Verification_Procedure_Version()[i].toString());
-    					report.write("<br/>");
-    		    		report.write("\n");
-    				}
-    			}
+			for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
+				ValidationResult validationResult2 = (ValidationResult) iterator.next();
 
-    			else {
-    				report.write("");
-    	    		report.write("\n");
-    			}
+				report.write("<tr>");
+				report.write("\n");
+				report.write("<td>");
+				report.write("\n");
+				report.write(validationResult2.getPUID());
+				report.write("</td>");
+				report.write("\n");
+				report.write("<td>");
+				report.write("\n");
+				if (validationResult2.getVV_Verification_Procedure_Name() != null) {
+					for (int i = 0; i < validationResult2.getVV_Verification_Procedure_Name().length; i++) {
 
-    			report.write("</td>");
-        		report.write("\n");
-    			report.write("<td>");
-        		report.write("\n");
-    			if (validationResult2.getComment()!=null) {
-    				for (int i = 0; i < validationResult2.getComment().length; i++) {
+						report.write(validationResult2.getVV_Verification_Procedure_Name()[i]);
+						report.write("\n");
+						report.write("<br/>");
+						report.write("\n");
+					}
+				} else {
+					report.write("");
+					report.write("\n");
+				}
+				report.write("</td>");
+				report.write("\n");
+				report.write("<td>");
+				report.write("\n");
+				if (validationResult2.getVV_Verification_Procedure_Version() != null) {
+					for (int i = 0; i < validationResult2.getVV_Verification_Procedure_Version().length; i++) {
+						report.write(validationResult2.getVV_Verification_Procedure_Version()[i].toString());
+						report.write("<br/>");
+						report.write("\n");
+					}
+				}
 
-    					
-    					report.write(validationResult2.getComment()[i]);
-    					
-    		    		report.write("\n");
-    		    		report.write("<br/>");
-    		    		report.write("\n");
-    				}
-    			}
+				else {
+					report.write("");
+					report.write("\n");
+				}
 
-    			else {
-    				report.write("");
-    	    		report.write("\n");
-    			}
+				report.write("</td>");
+				report.write("\n");
+				report.write("<td>");
+				report.write("\n");
+				if (validationResult2.getComment() != null) {
+					for (int i = 0; i < validationResult2.getComment().length; i++) {
 
-    			report.write("</td>");
-        		report.write("\n");
+						report.write(validationResult2.getComment()[i]);
 
-    			report.write("<tr>");
-        		report.write("\n");
+						report.write("\n");
+						report.write("<br/>");
+						report.write("\n");
+					}
+				}
 
-    		}
+				else {
+					report.write("");
+					report.write("\n");
+				}
 
-    		report.write("</table>");
-    		report.write("\n");
-    		report.write("</body>");
-    		report.write("\n");
-    		report.write("</html>");
-    		report.write("\n");
-            report.close();
-        } catch (IOException e) {
-            System.err.println("Problem writing to the file statsTest.txt");
-        }
+				report.write("</td>");
+				report.write("\n");
 
-		
+				report.write("<tr>");
+				report.write("\n");
+
+			}
+
+			report.write("</table>");
+			report.write("\n");
+			report.write("</body>");
+			report.write("\n");
+			report.write("</html>");
+			report.write("\n");
+			report.close();
+		} catch (IOException e) {
+			System.err.println("Problem writing to the file statsTest.txt");
+		}
+
 	}
 
 }
