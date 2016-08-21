@@ -20,7 +20,7 @@ public class AttributePosition {
 	final private Node childNode;
 	HashMap<String,Integer> hm=new HashMap<String,Integer>();  
 
-	private int j = 0;
+	private int j;
 	private List<AtrributePostionTO> listAttribute = new ArrayList<AtrributePostionTO>();
 
 	/**
@@ -28,6 +28,7 @@ public class AttributePosition {
 	 */
 	public AttributePosition(Node childNode) {
 		this.childNode = childNode;
+		this.j=0;
 	}
 
 	private void getAttributeAndPosition(Node childNode) {
@@ -53,7 +54,6 @@ public class AttributePosition {
 		} else {
 
 			if (childNode.childNodeSize() == 1) {
-
 				hm.put(childNode.childNode(0).toString(), j);
 				//listAttribute.add(new AtrributePostionTO(childNode.childNode(0).toString(), j));
 				j++;
@@ -63,7 +63,7 @@ public class AttributePosition {
 	}
 
 	public HashMap<String,Integer> getAttributeAndPosition() {
-
+        j=0;
 		getAttributeAndPosition(childNode);
 
 		return hm;

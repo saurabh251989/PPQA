@@ -4,10 +4,15 @@
 package com.ppqa;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jsoup.nodes.Node;
+
+import com.ppqa.instance.Instance;
+import com.ppqa.util.AttributePosition;
+import com.ppqa.util.NodeOperation;
 
 /**
  * @author Saurabh Kumar
@@ -17,6 +22,7 @@ import org.jsoup.nodes.Node;
 public class MTSNode {
 
 	List<Node> nodeList;
+	NodeOperation nodeOperation = new NodeOperation();
 
 	/**
 	 * 
@@ -30,12 +36,15 @@ public class MTSNode {
 
 		List<Node> mtsListNode = new ArrayList<Node>();
 		List<Node> tempNode = new ArrayList<Node>();
+		
+		
 		for (Iterator<Node> iterator = nodeList.iterator(); iterator.hasNext();) {
 			Node node = iterator.next();
 
 			tempNode = removeTextNode(node.childNodes());
-
-			if (tempNode.get(0).toString().contains("[MTS_")) {
+			if (tempNode.get(Instance.attributePosition.getAttributeAndPosition().get("PUID")).toString().contains("[MTS_") &&
+					nodeOperation.getNodeText(tempNode.get(Instance.attributePosition.getAttributeAndPosition().get("Req_Mother")))!=null	
+					) {
 				mtsListNode.add(node);
 
 			}

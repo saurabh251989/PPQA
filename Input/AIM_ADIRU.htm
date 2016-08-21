@@ -81,7 +81,7 @@
 <td nowrap align="left"><small>...</small></td>
 </tr>
 <tr><td><b>[MTS_OPSW_P4-IVVP-4050]</b></td>
-<td>SDD_OPSW-CI-1073</td>
+<td></td>
 <td><a name="X12603150"> 
 </a>1073:&#60;2&#62;<br><br><b>Test Objective:</b><br>1) This MTS verifies that the function set the following DB entries to FALSE via DMA_Set() when AFDX_Status_Fail from DB index DML_AFDXSTATUSFAIL is TRUE (&#60;2&#62; of SDD_OPSW-CI-1073)<br>DML_FDS_ADIRU1_CASVAL<br>DML_FDS_ADIRU2_CASVAL<br>DML_FDS_ADIRU3_CASVAL<br>DML_FDS_ADIRU1_STATUSVAL<br>DML_FDS_ADIRU2_STATUSVAL<br>DML_FDS_ADIRU3_STATUSVAL<br>DML_AFDXCONSOLIDATEDCASVAL<br><br><b>Template Used:</b> Coupling Standard Test Procedure <br><br><b>Input Stimulation: </b><br>GlobalData(DMA_Database[DML_AFDXSTATUSFAIL].Data)  =   TRUE<br><br><b>Transfer Action:</b> CallOfFunction(AIM_ADIRU_Monitor()) <br><br><b>Output Verification:</b> <br>The output is verified by using standard output method ValueWritten2DB as follows: (Test Objective 1)<br>ValueWritten2DB(DML_FDS_ADIRU1_CASVAL, FALSE)<br>ValueWritten2DB(DML_FDS_ADIRU2_CASVAL, FALSE)<br>ValueWritten2DB(DML_FDS_ADIRU3_CASVAL, FALSE)<br>ValueWritten2DB(DML_FDS_ADIRU1_STATUSVAL, FALSE)<br>ValueWritten2DB(DML_FDS_ADIRU2_STATUSVAL, FALSE)<br>ValueWritten2DB(DML_FDS_ADIRU3_STATUSVAL, FALSE)<br>ValueWritten2DB(DML_AFDXCONSOLIDATEDCASVAL , FALSE)<br>
 </td>

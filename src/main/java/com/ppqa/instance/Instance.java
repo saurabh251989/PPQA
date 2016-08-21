@@ -6,6 +6,7 @@ package com.ppqa.instance;
 import java.util.HashMap;
 
 import com.ppqa.ClearCaseNameAndVersion;
+import com.ppqa.util.AttributePosition;
 
 /**
  * @author Saurabh Kumar
@@ -13,6 +14,7 @@ import com.ppqa.ClearCaseNameAndVersion;
  */
 public class Instance {
 public static final HashMap<String, Integer> clearCaseNameAndVersion;
+public static AttributePosition attributePosition=null;
 static
 {
 	
