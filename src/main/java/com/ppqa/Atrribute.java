@@ -11,6 +11,9 @@ import java.util.List;
  *
  */
 public class Atrribute {
+	
+	
+	
 	private String PUID;
 	private List<String> Req_Mother;
 	private String MTS;

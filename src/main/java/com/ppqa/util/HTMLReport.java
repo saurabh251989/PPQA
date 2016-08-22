@@ -22,18 +22,26 @@ import com.ppqa.ValidationResult;
 public class HTMLReport {
 
 	List<ValidationResult> validationResult;
+	List<String> comment;
 
 	/**
 	 * @param validationResult
 	 */
-	public HTMLReport(List<ValidationResult> validationResult) {
+	public HTMLReport() {
+
+	}
+
+	public HTMLReport(List<ValidationResult> validationResult, List<String> comment) {
 		this.validationResult = validationResult;
+		this.comment = comment;
 	}
 
 	/**
-	 * 
+	 * @param comment
 	 */
-	public HTMLReport() {
+	public HTMLReport(List<String> comment) {
+
+		this.comment = comment;
 	}
 
 	public void generateHTMLReport() {
@@ -140,23 +148,25 @@ public class HTMLReport {
 			FileOutputStream is = new FileOutputStream(statText, false);
 			OutputStreamWriter osw = new OutputStreamWriter(is);
 			Writer report = new BufferedWriter(osw);
-            String cr="green";
-			xyz:
-			for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
+			String cr = "green";
+			xyz: for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
 				ValidationResult validationResult2 = (ValidationResult) iterator.next();
-		         for (int i = 0; i < validationResult2.getComment().length; i++) {
-					 
-		        	 if(!validationResult2.getComment()[i].equals("None"))
-		        	 {
-		        		
-		        		 cr="red";
-		        	      break xyz;	 
-		        	 }
-		        	 }
-				}	
-			
-			
-			
+				for (int i = 0; i < validationResult2.getComment().length; i++) {
+
+					if (!validationResult2.getComment()[i].equals("None")) {
+
+						cr = "red";
+						break xyz;
+					}
+				}
+			}
+
+			if (comment.size() > 0) {
+
+				cr = "red";
+
+			}
+
 			report.write("<!DOCTYPE html>");
 			report.write("\n");
 
@@ -191,8 +201,17 @@ public class HTMLReport {
 
 			report.write("<table style=\"width:100%\">");
 			report.write("\n");
-			report.write("<caption ><font color="+cr+">"+fileName.substring(0,fileName.indexOf("."))+"_REPORT"+"</caption>");
+			report.write("<caption ><font color=" + cr + ">" + fileName.substring(0, fileName.indexOf(".")) + "_REPORT"
+					+ "");
 			report.write("\n");
+			for (Iterator<String> iterator = comment.iterator(); iterator.hasNext();) {
+				String comment = (String) iterator.next();
+
+				report.write("</br>");
+				report.write(comment);
+
+			}
+			report.write("</caption>");
 			report.write("<tr>");
 			report.write("\n");
 			report.write("<th>");
@@ -221,7 +240,7 @@ public class HTMLReport {
 			report.write("</th>");
 			report.write("\n");
 
-			report.write("<tr>");
+			report.write("</tr>");
 			report.write("\n");
 
 			for (Iterator<ValidationResult> iterator = validationResult.iterator(); iterator.hasNext();) {
@@ -294,9 +313,78 @@ public class HTMLReport {
 			}
 
 			report.write("</table>");
+
 			report.write("\n");
 			report.write("</body>");
 			report.write("\n");
+
+			report.write("</html>");
+			report.write("\n");
+			report.close();
+		} catch (IOException e) {
+			System.err.println("Problem writing to the file statsTest.txt");
+		}
+
+	}
+
+	public void generateHTMLReport(String fileName, boolean flag) {
+		try {
+			File statText = new File("Output/" + "Result_" + fileName);
+			FileOutputStream is = new FileOutputStream(statText, false);
+			OutputStreamWriter osw = new OutputStreamWriter(is);
+			Writer report = new BufferedWriter(osw);
+			String cr = "red";
+
+			report.write("<!DOCTYPE html>");
+			report.write("\n");
+
+			report.write("<html>");
+			report.write("\n");
+			report.write("<head>");
+			report.write("\n");
+			report.write("<style>");
+			report.write("\n");
+			report.write("table, th, td {");
+			report.write("\n");
+			report.write("    border: 1px solid black;");
+			report.write("\n");
+			report.write(" border-collapse: collapse;");
+			report.write("\n");
+			report.write("}");
+			report.write("\n");
+			report.write("th, td {");
+			report.write("\n");
+			report.write("padding: 5px;");
+			report.write("\n");
+			report.write("text-align: left;");
+			report.write("\n");
+			report.write("}");
+			report.write("\n");
+			report.write("</style>");
+			report.write("\n");
+			report.write("</head>");
+			report.write("\n");
+			report.write("<body>");
+			report.write("\n");
+
+			report.write("<table style=\"width:100%\">");
+			report.write("\n");
+			report.write("<caption ><font color=" + cr + ">" + fileName.substring(0, fileName.indexOf(".")) + "_REPORT"
+					+ "");
+			report.write("\n");
+			for (Iterator<String> iterator = comment.iterator(); iterator.hasNext();) {
+				String comment = (String) iterator.next();
+
+				report.write("</br>");
+				report.write(comment);
+
+			}
+			report.write("</caption>");
+
+			report.write("\n");
+			report.write("</body>");
+			report.write("\n");
+
 			report.write("</html>");
 			report.write("\n");
 			report.close();
