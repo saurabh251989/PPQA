@@ -1,6 +1,7 @@
 
 package com.ppqa;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,12 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import org.jsoup.nodes.Node;
 
 import com.ppqa.instance.Instance;
+import com.ppqa.log.Log4jConfigurator;
 import com.ppqa.util.AttributePosition;
 import com.ppqa.util.HTMLReport;
 import com.ppqa.util.NodeOperation;
@@ -29,8 +33,19 @@ import com.ppqa.util.NodeOperation;
  */
 public class Test {
 
-	public static void main(String[] args) throws IOException {
+	static final Logger logger = Logger.getLogger(Test.class);
 
+	private static final String LOG_FILE_PATH = "resources/log4j-config.xml";
+
+	public static void main(String[] args) throws IOException {
+		File file = new File("src/main/"+LOG_FILE_PATH);
+		String absolutePath = file.getAbsolutePath();
+		// Configure logger service
+		Log4jConfigurator.getInstance().initilize(absolutePath);
+
+		// Get logger instance
+		Logger LOGGER = Logger.getLogger(Test.class);
+		
 		Files.walk(Paths.get("Input/")).forEach(filePath -> {
 
 			if (Files.isRegularFile(filePath) && (filePath.getFileName().toString().endsWith(".html")
@@ -40,6 +55,7 @@ public class Test {
 				Document doc = null;
 				try {
 					doc = Jsoup.parse(filePath.toFile(), "UTF-8");
+					LOGGER.info(filePath.toFile());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
