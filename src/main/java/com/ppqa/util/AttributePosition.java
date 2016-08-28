@@ -55,7 +55,6 @@ public class AttributePosition {
 
 			if (childNode.childNodeSize() == 1) {
 				hm.put(childNode.childNode(0).toString(), j);
-				//listAttribute.add(new AtrributePostionTO(childNode.childNode(0).toString(), j));
 				j++;
 			}
 		}

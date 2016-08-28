@@ -3,7 +3,6 @@
  */
 package com.ppqa.util;
 
-import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
